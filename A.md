@@ -72,9 +72,11 @@
     </form>
     <!-- form 标签结束 -->
 ```
+<div style="text-align: center;">
+  <img src="https://github.com/user-attachments/assets/11850b11-f209-4ab0-9003-c0454a851674" alt="描述文字" width="300">
+</div>
 
 - #### action属性（定义提交到哪）
-
   > ##### **action 属性的基本定义**
   >
   > - `action` 是 HTML `<form>` 标签的一个**必需属性**，它用于指定当用户提交表单时，表单数据应该发送到哪个服务器端程序或页面进行处理。
@@ -254,7 +256,7 @@
   >>
   >
   >
-
+<hr>
 ### 2、tomcat的默认端口是什么
 
 >Tomcat服务器的默认端口是`8080`,这意味着
@@ -332,7 +334,7 @@
 >      TCP    127.0.0.1:5354         127.0.0.1:49683        ESTABLISHED     5204
 >      TCP    127.0.0.1:8681         0.0.0.0:0              LISTENING       110856
 >    ```
-
+<hr>
 ### 3、javabean标签的使用
 
 - #### 标准JavaBean
