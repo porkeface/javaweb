@@ -7,7 +7,7 @@
 ```html
 <!-- form 标签开始 -->
     <form action="/register" method="post" enctype="application/x-www-form-urlencoded">
-    
+  
         <!-- 文本输入框 -->
          <!-- required表示必填 -->
         <div class="form-group">
@@ -15,28 +15,29 @@
             <input type="text" id="username" name="username" required 
                    placeholder="请输入用户名" minlength="4" maxlength="20">
         </div>
-    
+  
         <!-- 密码输入框 -->
         <div class="form-group">
             <label for="password">密码:</label>
             <input type="password" id="password" name="password" required
                    placeholder="请输入密码" minlength="6">
         </div>
-    
+  
         <!-- 邮箱输入框 -->
         <div class="form-group">
             <label for="email">电子邮箱:</label>
             <input type="email" id="email" name="email" required
                    placeholder="example@domain.com">
         </div>
-    
+  
         <!-- 单选按钮 -->
+        <!-- checked表示勾选状态 -->
         <div class="form-group">
             <label>性别:</label>
             <label><input type="radio" name="gender" value="male" checked> 男</label>
             <label><input type="radio" name="gender" value="female"> 女</label>
         </div>
-    
+  
         <!-- 下拉选择框 -->
         <div class="form-group">
             <label for="country">国家/地区:</label>
@@ -47,7 +48,7 @@
                 <option value="uk">英国</option>
             </select>
         </div>
-    
+  
         <!-- 多选框 -->
         <div class="form-group">
             <label>兴趣爱好:</label>
@@ -55,19 +56,19 @@
             <label><input type="checkbox" name="hobbies" value="sports"> 运动</label>
             <label><input type="checkbox" name="hobbies" value="music"> 音乐</label>
         </div>
-    
+  
         <!-- 文件上传 -->
         <div class="form-group">
             <label for="avatar">头像上传:</label>
             <input type="file" id="avatar" name="avatar" accept="image/*">
         </div>
-    
+  
         <!-- 隐藏域 -->
         <input type="hidden" name="token" value="abc123xyz">
-    
+  
         <!-- 提交按钮 -->
         <button type="submit">注册</button>
-    
+  
         <!-- 重置按钮 -->
         <button type="reset">重置</button>
     </form>
