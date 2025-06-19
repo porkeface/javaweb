@@ -9,6 +9,7 @@
     <form action="/register" method="post" enctype="application/x-www-form-urlencoded">
         
         <!-- 文本输入框 -->
+         <!-- required表示必填 -->
         <div class="form-group">
             <label for="username">用户名:</label>
             <input type="text" id="username" name="username" required 
