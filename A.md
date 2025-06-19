@@ -5,9 +5,9 @@
 ### 1、HTML form标签使用
 
 ```html
-    <!-- form 标签开始 -->
+<!-- form 标签开始 -->
     <form action="/register" method="post" enctype="application/x-www-form-urlencoded">
-      
+    
         <!-- 文本输入框 -->
          <!-- required表示必填 -->
         <div class="form-group">
@@ -15,28 +15,28 @@
             <input type="text" id="username" name="username" required 
                    placeholder="请输入用户名" minlength="4" maxlength="20">
         </div>
-      
+    
         <!-- 密码输入框 -->
         <div class="form-group">
             <label for="password">密码:</label>
             <input type="password" id="password" name="password" required
                    placeholder="请输入密码" minlength="6">
         </div>
-      
+    
         <!-- 邮箱输入框 -->
         <div class="form-group">
             <label for="email">电子邮箱:</label>
             <input type="email" id="email" name="email" required
                    placeholder="example@domain.com">
         </div>
-      
+    
         <!-- 单选按钮 -->
         <div class="form-group">
             <label>性别:</label>
             <label><input type="radio" name="gender" value="male" checked> 男</label>
             <label><input type="radio" name="gender" value="female"> 女</label>
         </div>
-      
+    
         <!-- 下拉选择框 -->
         <div class="form-group">
             <label for="country">国家/地区:</label>
@@ -47,7 +47,7 @@
                 <option value="uk">英国</option>
             </select>
         </div>
-      
+    
         <!-- 多选框 -->
         <div class="form-group">
             <label>兴趣爱好:</label>
@@ -55,19 +55,19 @@
             <label><input type="checkbox" name="hobbies" value="sports"> 运动</label>
             <label><input type="checkbox" name="hobbies" value="music"> 音乐</label>
         </div>
-      
+    
         <!-- 文件上传 -->
         <div class="form-group">
             <label for="avatar">头像上传:</label>
             <input type="file" id="avatar" name="avatar" accept="image/*">
         </div>
-      
+    
         <!-- 隐藏域 -->
         <input type="hidden" name="token" value="abc123xyz">
-      
+    
         <!-- 提交按钮 -->
         <button type="submit">注册</button>
-      
+    
         <!-- 重置按钮 -->
         <button type="reset">重置</button>
     </form>
@@ -697,7 +697,7 @@ JavaBean可以在不同作用域中共享：
 >        // 初始化数据库连接
 >        dbConnection = new DatabaseConnection();
 >        dbConnection.connect();
->      
+>    
 >        // 获取初始化参数（web.xml中配置的）
 >        String config = getInitParameter("configFile");
 >        System.out.println("Servlet初始化完成，配置文件：" + config);
@@ -723,11 +723,11 @@ JavaBean可以在不同作用域中共享：
   > public class MyServlet extends HttpServlet {
   >    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
   >            throws ServletException, IOException {
-  >      
+  >    
   >        response.setContentType("text/html");
   >        PrintWriter out = response.getWriter();
   >        out.println("<h1>处理GET请求</h1>");
-  >      
+  >    
   >        // 使用初始化阶段创建的数据库连接
   >        List<User> users = dbConnection.getUsers();
   >        // ...处理数据
@@ -735,7 +735,7 @@ JavaBean可以在不同作用域中共享：
   >    
   >    protected void doPost(HttpServletRequest request, HttpServletResponse response) 
   >            throws ServletException, IOException {
-  >      
+  >    
   >        String username = request.getParameter("username");
   >        // 处理表单提交...
   >        response.sendRedirect("/success.jsp");
@@ -766,7 +766,7 @@ JavaBean可以在不同作用域中共享：
   >            dbConnection.close();
   >            System.out.println("释放数据库连接");
   >        }
-  >      
+  >    
   >        // 保存日志信息等
   >        saveAccessLog();
   >    }
@@ -1061,7 +1061,7 @@ JavaBean可以在不同作用域中共享：
   > ##### 使用方法
   >
   > ```java
-  >    // 1. 获取数据库连接
+  > // 1. 获取数据库连接
   >    String url = "jdbc:mysql://localhost:3306/mydb";
   >    String user = "root";
   >    String password = "password";
@@ -1070,21 +1070,21 @@ JavaBean可以在不同作用域中共享：
   >    try {
   >        // 加载驱动（JDBC 4.0+可省略）
   >        Class.forName("com.mysql.cj.jdbc.Driver");
-  >      
+  >    
   >        // 建立连接
   >        conn = DriverManager.getConnection(url, user, password);
-  >      
+  >    
   >        // 2. 设置连接属性
   >        conn.setAutoCommit(false); // 关闭自动提交，开启事务
-  >      
+  >    
   >        // 3. 使用连接创建Statement
   >        Statement stmt = conn.createStatement();
-  >      
+  >    
   >        // 执行SQL操作...
-  >      
+  >    
   >        // 提交事务
   >        conn.commit();
-  >      
+  >    
   >    } catch (Exception e) {
   >        // 发生异常时回滚
   >        if (conn != null) {
@@ -1122,25 +1122,25 @@ JavaBean可以在不同作用域中共享：
   > ##### 使用方法
   >
   > ```java
-  >   try (Connection conn = DriverManager.getConnection(url, user, password);
+  > try (Connection conn = DriverManager.getConnection(url, user, password);
   >        Statement stmt = conn.createStatement()) {
-  >     
+  >   
   >       // 1. 执行查询
   >       ResultSet rs = stmt.executeQuery("SELECT * FROM employees");
   >       while (rs.next()) {
   >           System.out.println(rs.getString("name"));
   >       }
-  >     
+  >   
   >       // 2. 执行更新
   >       int rows = stmt.executeUpdate(
   >           "UPDATE employees SET salary = salary * 1.1 WHERE dept = 'IT'");
   >       System.out.println("更新了" + rows + "行");
-  >     
+  >   
   >       // 3. 批处理
   >       stmt.addBatch("INSERT INTO departments VALUES(10, 'IT')");
   >       stmt.addBatch("INSERT INTO departments VALUES(20, 'HR')");
   >       int[] counts = stmt.executeBatch();
-  >     
+  >   
   >   } catch (SQLException e) {
   >       e.printStackTrace();
   >   }
@@ -1160,30 +1160,30 @@ JavaBean可以在不同作用域中共享：
   > ##### 使用方法
   >
   > ```java
-  >    String sql = "INSERT INTO employees (id, name, salary, hire_date) VALUES (?, ?, ?, ?)";
+  > String sql = "INSERT INTO employees (id, name, salary, hire_date) VALUES (?, ?, ?, ?)";
   >    
   >    try (Connection conn = getConnection();
   >         PreparedStatement pstmt = conn.prepareStatement(sql)) {
-  >      
+  >    
   >        // 1. 设置参数（索引从1开始）
   >        pstmt.setInt(1, 1001);
   >        pstmt.setString(2, "张三");
   >        pstmt.setDouble(3, 8500.50);
   >        pstmt.setDate(4, new java.sql.Date(System.currentTimeMillis()));
-  >      
+  >    
   >        // 2. 执行更新
   >        int rows = pstmt.executeUpdate();
-  >      
+  >    
   >        // 3. 重用PreparedStatement
   >        pstmt.setInt(1, 1002);
   >        pstmt.setString(2, "李四");
   >        pstmt.setDouble(3, 9200.00);
   >        pstmt.setDate(4, new java.sql.Date(new SimpleDateFormat("yyyy-MM-dd")
   >                            .parse("2020-01-15").getTime()));
-  >      
+  >    
   >        rows += pstmt.executeUpdate();
   >        System.out.println("插入了" + rows + "条记录");
-  >      
+  >    
   >    } catch (Exception e) {
   >        e.printStackTrace();
   >    }
@@ -1202,24 +1202,24 @@ JavaBean可以在不同作用域中共享：
   > ##### 使用方法
   >
   > ```java
-  >   // 假设有存储过程：CREATE PROCEDURE raise_salary(IN emp_id INT, IN percent DOUBLE, OUT new_salary DOUBLE)
+  > // 假设有存储过程：CREATE PROCEDURE raise_salary(IN emp_id INT, IN percent DOUBLE, OUT new_salary DOUBLE)
   >   try (Connection conn = getConnection();
   >        CallableStatement cstmt = conn.prepareCall("{call raise_salary(?, ?, ?)}")) {
-  >     
+  >   
   >       // 1. 设置输入参数
   >       cstmt.setInt(1, 1001);       // emp_id
   >       cstmt.setDouble(2, 0.1);     // 10%涨薪
-  >     
+  >   
   >       // 2. 注册输出参数
   >       cstmt.registerOutParameter(3, Types.DOUBLE);  // new_salary
-  >     
+  >   
   >       // 3. 执行存储过程
   >       cstmt.execute();
-  >     
+  >   
   >       // 4. 获取输出参数
   >       double newSalary = cstmt.getDouble(3);
   >       System.out.println("调整后薪资：" + newSalary);
-  >     
+  >   
   >   } catch (SQLException e) {
   >       e.printStackTrace();
   >   }
@@ -1238,37 +1238,37 @@ JavaBean可以在不同作用域中共享：
   > ##### 使用方法
   >
   > ```java
-  >    String sql = "SELECT id, name, salary, hire_date FROM employees WHERE dept = ?";
+  > String sql = "SELECT id, name, salary, hire_date FROM employees WHERE dept = ?";
   >    
   >    try (Connection conn = getConnection();
   >         PreparedStatement pstmt = conn.prepareStatement(sql, 
   >                                    ResultSet.TYPE_SCROLL_INSENSITIVE,
   >                                    ResultSet.CONCUR_UPDATABLE)) {
-  >      
+  >    
   >        pstmt.setString(1, "IT");
-  >      
+  >    
   >        // 1. 执行查询并获取ResultSet
   >        try (ResultSet rs = pstmt.executeQuery()) {
-  >          
+  >        
   >            // 2. 遍历结果集
   >            while (rs.next()) {
   >                int id = rs.getInt("id");  // 通过列名获取
   >                String name = rs.getString(2); // 通过列索引获取（从1开始）
   >                double salary = rs.getDouble("salary");
   >                Date hireDate = rs.getDate("hire_date");
-  >              
+  >            
   >                System.out.printf("%d\t%s\t%.2f\t%s%n", id, name, salary, hireDate);
   >            }
-  >          
+  >        
   >            // 3. 可滚动结果集操作
   >            rs.absolute(3); // 移动到第3行
   >            System.out.println("第3行员工：" + rs.getString("name"));
-  >          
+  >        
   >            // 4. 可更新结果集操作
   >            rs.updateDouble("salary", rs.getDouble("salary") * 1.05);
   >            rs.updateRow(); // 必须调用以保存更改
   >        }
-  >      
+  >    
   >    } catch (SQLException e) {
   >        e.printStackTrace();
   >    }
@@ -1508,12 +1508,11 @@ JSP（JavaServer Pages）标记是JSP技术中用于在HTML页面中嵌入Java�
 - #### 标记对比：JSP标记 vs HTML标记
 
 
-| 特性         | JSP标记                         | HTML标记               |
-| ------------ | ------------------------------- | ---------------------- |
-| **处理时机** | 服务器端执行                    | 浏览器端解析           |
-| **功能**     | 生成动态内容、业务逻辑处理      | 定义页面结构和静态内容 |
-| **语法**     | 以`<%`或`<jsp:`或自定义前缀开头 | 标准HTML标签           |
-| **可见性**   | 客户端不可见（只看到执行结果）  | 客户端可见             |
+| 特性         | JSP标记                    | HTML标记               |
+| ------------ | -------------------------- | ---------------------- |
+| **处理时机** | 服务器端执行               | 浏览器端解析           |
+| **功能**     | 生成动态内容、业务逻辑处理 | 定义页面结构和静态内容 |
+| **语法**     | 以`<%`或`                  |                        |
 
 - #### 最佳实践
 
@@ -1633,21 +1632,21 @@ MVC（Model-View-Controller）是一种将应用程序分为三个核心组件�
   > public class ProductController extends HttpServlet {
   >    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
   >            throws ServletException, IOException {
-  >      
+  >    
   >        // 1. 获取参数
   >        String id = request.getParameter("id");
-  >      
+  >    
   >        // 2. 调用Model
   >        Product product = ProductService.getProduct(id);
-  >      
+  >    
   >        // 3. 业务逻辑处理
   >        if(product.getStock() < 10) {
   >            PricingService.applyDiscount(product); // 调用定价服务
   >        }
-  >      
+  >    
   >        // 4. 设置视图属性
   >        request.setAttribute("product", product);
-  >      
+  >    
   >        // 5. 转发到View
   >        request.getRequestDispatcher("/productView.jsp").forward(request, response);
   >    }
@@ -1746,15 +1745,15 @@ public class LoggingFilter implements Filter {
     @Override
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain)
             throws IOException, ServletException {
-      
+    
         // 1. 预处理逻辑（请求到达目标资源前执行）
         long startTime = System.currentTimeMillis();
         HttpServletRequest httpReq = (HttpServletRequest) req;
         System.out.println("Request URI: " + httpReq.getRequestURI());
-      
+    
         // 2. 将请求传递给过滤器链中的下一个组件
         chain.doFilter(req, resp);  // 关键调用！
-      
+    
         // 3. 后处理逻辑（目标资源处理完成后执行）
         long duration = System.currentTimeMillis() - startTime;
         System.out.println("Request processed in " + duration + "ms");
@@ -2126,11 +2125,11 @@ public class LoggingFilter implements Filter {
 >        {
 >            // 发送请求
 >            out.println("GET_USER_INFO 1001");
->          
+>        
 >            // 接收响应
 >            String response = in.readLine();
 >            System.out.println("服务器响应: " + response);
->          
+>        
 >        } catch (IOException e) {
 >            e.printStackTrace();
 >        }
@@ -2375,7 +2374,7 @@ graph LR
 - #### URL完整结构
 
   ```
-    https://www.example.com:8080/path/to/page?name=ferret&color=purple#section2
+  https://www.example.com:8080/path/to/page?name=ferret&color=purple#section2
     \___/   \_____________/\__/\__________/ \______________________/ \_______/
       |           |         |       |                |                   |
     协议      主机名      端口    路径             查询参数             片段标识
@@ -2759,6 +2758,7 @@ Cookie 是服务器发送到用户浏览器并保存在本地的小型数据片�
 - 定义
 
 JSP (JavaServer Pages) 是一种基于Java的技术，用于开发动态Web页面。它允许开发人员将Java代码嵌入HTML页面中，从而创建动态内容。JSP是Java EE (Enterprise Edition) 的一部分，是Servlet技术的扩展。
+
 - 执行过程
 
 ### 2、Servlet生命周期
@@ -2775,80 +2775,27 @@ JSP (JavaServer Pages) 是一种基于Java的技术，用于开发动态Web页�
 
 ## 五、编程题 (1×20)
 
-实现简单网页计算器（使用application对象，需补充代码，只需要补充js部分）：
+实现简单网页计数器（使用application对象，需补充代码，只需要补充js部分）：
 
-- ### HTML部分（计算器界面）
+- ### HTML部分（计数器界面）
 
 ```html
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>简单计算器</title>
-    <style>
-        .calculator {
-            width: 300px;
-            margin: 50px auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        .display {
-            width: 100%;
-            height: 40px;
-            margin-bottom: 10px;
-            font-size: 18px;
-            text-align: right;
-        }
-        .buttons {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-        }
-        button {
-            height: 40px;
-            font-size: 16px;
-        }
-        .history {
-            margin-top: 20px;
-            padding: 10px;
-            border: 1px solid #eee;
-            max-height: 200px;
-            overflow-y: auto;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网页计数器</title>
 </head>
 <body>
-    <div class="calculator">
-        <input type="text" class="display" id="display" readonly>
-        <div class="buttons">
-            <button onclick="appendToDisplay('7')">7</button>
-            <button onclick="appendToDisplay('8')">8</button>
-            <button onclick="appendToDisplay('9')">9</button>
-            <button onclick="appendToDisplay('/')">/</button>
-            <button onclick="appendToDisplay('4')">4</button>
-            <button onclick="appendToDisplay('5')">5</button>
-            <button onclick="appendToDisplay('6')">6</button>
-            <button onclick="appendToDisplay('*')">×</button>
-            <button onclick="appendToDisplay('1')">1</button>
-            <button onclick="appendToDisplay('2')">2</button>
-            <button onclick="appendToDisplay('3')">3</button>
-            <button onclick="appendToDisplay('-')">-</button>
-            <button onclick="appendToDisplay('0')">0</button>
-            <button onclick="appendToDisplay('.')">.</button>
-            <button onclick="calculate()">=</button>
-            <button onclick="appendToDisplay('+')">+</button>
-            <button onclick="clearDisplay()">C</button>
-        </div>
-        <div class="history" id="history">
-            <h3>计算历史</h3>
-            <ul id="historyList"></ul>
-        </div>
+    <h1>网页访问计数器</h1>
+    <p>本页访问次数: <span id="counter">0</span></p>
+  
+    <div>
+        <button id="resetBtn">重置计数器</button>
     </div>
 
-    <script>
-        // 这里将补充JavaScript代码
-    </script>
+    <script src="counter.js"></script>
 </body>
 </html>
 ```
@@ -2856,88 +2803,39 @@ JSP (JavaServer Pages) 是一种基于Java的技术，用于开发动态Web页�
 ### JavaScript部分（需要补充的代码）
 
 ```javascript
-<script>
-    // 初始化application对象（模拟服务器端application）
-    if (!window.application) {
-        window.application = {
-            history: [] // 存储计算历史
-        };
+// 使用localStorage实现持久化计数器
+// 如果是sessionStorage，关闭浏览器后会重置
+
+document.addEventListener('DOMContentLoaded', function() {
+    const counterElement = document.getElementById('counter');
+    const resetBtn = document.getElementById('resetBtn');
+  
+    // 初始化计数器
+    let count = localStorage.getItem('pageCounter');
+  
+    // 如果计数器不存在，设置为0
+    if (count === null) {
+        count = 0;
+    } else {
+        count = parseInt(count);
     }
-
-    // 获取显示器和历史列表元素
-    const display = document.getElementById('display');
-    const historyList = document.getElementById('historyList');
-
-    // 1. 向显示器追加内容
-    function appendToDisplay(value) {
-        display.value += value;
-    }
-
-    // 2. 清空显示器
-    function clearDisplay() {
-        display.value = '';
-    }
-
-    // 3. 执行计算
-    function calculate() {
-        try {
-            const expression = display.value;
-            // 安全评估表达式（替代eval）
-            const result = safeEval(expression);
-          
-            // 更新显示器
-            display.value = result;
-          
-            // 记录计算历史
-            const calculation = `${expression} = ${result}`;
-            addToHistory(calculation);
-          
-        } catch (error) {
-            display.value = '错误';
-        }
-    }
-
-    // 4. 安全评估数学表达式
-    function safeEval(expr) {
-        // 移除所有非数学表达式字符
-        const sanitized = expr.replace(/[^0-9+\-*/.()]/g, '');
-      
-        // 使用Function构造器进行安全评估
-        return new Function('return ' + sanitized)();
-    }
-
-    // 5. 添加到历史记录
-    function addToHistory(calculation) {
-        // 添加到application对象
-        application.history.push(calculation);
-      
-        // 如果历史记录超过10条，移除最旧的一条
-        if (application.history.length > 10) {
-            application.history.shift();
-        }
-      
-        // 更新历史记录显示
-        updateHistoryDisplay();
-    }
-
-    // 6. 更新历史记录显示
-    function updateHistoryDisplay() {
-        // 清空现有历史列表
-        historyList.innerHTML = '';
-      
-        // 反向遍历历史记录（最新显示在最上面）
-        application.history.slice().reverse().forEach(item => {
-            const li = document.createElement('li');
-            li.textContent = item;
-            historyList.appendChild(li);
-        });
-    }
-
-    // 7. 页面加载时显示历史记录
-    window.onload = function() {
-        updateHistoryDisplay();
-    };
-</script>
+  
+    // 增加计数
+    count++;
+  
+    // 更新显示
+    counterElement.textContent = count;
+  
+    // 存储新值
+    localStorage.setItem('pageCounter', count);
+  
+    // 重置按钮功能
+    resetBtn.addEventListener('click', function() {
+        count = 0;
+        counterElement.textContent = count;
+        localStorage.setItem('pageCounter', count);
+    });
+});
 ```
 
 - #### 功能说明
