@@ -409,7 +409,7 @@ JavaBean可以在不同作用域中共享：
 | 作用域      | 描述                     | 访问方式                            |
 | :---------- | :----------------------- | :---------------------------------- |
 | page        | 当前页面有效（默认）     | pageContext.getAttribute()          |
-| request     | 同一次请求有效（含转发） | request.getAttribute()              |
+|请求| 同一次请求有效（含转发） | request.getAttribute()              |
 | session     | 同一用户会话有效         | request.getSession().getAttribute() |
 | application | 整个应用有效             | application.getAttribute()          |
 
