@@ -31,7 +31,6 @@
         </div>
   
         <!-- 单选按钮 -->
-        <!-- checked表示勾选状态 -->
         <div class="form-group">
             <label>性别:</label>
             <label><input type="radio" name="gender" value="male" checked> 男</label>
@@ -253,11 +252,18 @@
   >>
   >> ###### 示例：
   >>
+  >> ```html
+  >>
   >> <form action="/register" method="post">
   >> 用户名: <input type="text" name="username">
   >> 密码: <input type="password" name="password">
   >> <input type="submit" value="注册">
   >> </form>
+  >> ```
+  >>
+  >> ```
+  >>
+  >> ```
   >>
   >
 
@@ -1250,21 +1256,21 @@ JavaBean可以在不同作用域中共享：
   >    
   >        // 1. 执行查询并获取ResultSet
   >        try (ResultSet rs = pstmt.executeQuery()) {
-  >        
+  >      
   >            // 2. 遍历结果集
   >            while (rs.next()) {
   >                int id = rs.getInt("id");  // 通过列名获取
   >                String name = rs.getString(2); // 通过列索引获取（从1开始）
   >                double salary = rs.getDouble("salary");
   >                Date hireDate = rs.getDate("hire_date");
-  >            
+  >          
   >                System.out.printf("%d\t%s\t%.2f\t%s%n", id, name, salary, hireDate);
   >            }
-  >        
+  >      
   >            // 3. 可滚动结果集操作
   >            rs.absolute(3); // 移动到第3行
   >            System.out.println("第3行员工：" + rs.getString("name"));
-  >        
+  >      
   >            // 4. 可更新结果集操作
   >            rs.updateDouble("salary", rs.getDouble("salary") * 1.05);
   >            rs.updateRow(); // 必须调用以保存更改
@@ -1746,15 +1752,15 @@ public class LoggingFilter implements Filter {
     @Override
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain)
             throws IOException, ServletException {
-    
+  
         // 1. 预处理逻辑（请求到达目标资源前执行）
         long startTime = System.currentTimeMillis();
         HttpServletRequest httpReq = (HttpServletRequest) req;
         System.out.println("Request URI: " + httpReq.getRequestURI());
-    
+  
         // 2. 将请求传递给过滤器链中的下一个组件
         chain.doFilter(req, resp);  // 关键调用！
-    
+  
         // 3. 后处理逻辑（目标资源处理完成后执行）
         long duration = System.currentTimeMillis() - startTime;
         System.out.println("Request processed in " + duration + "ms");
@@ -2126,11 +2132,11 @@ public class LoggingFilter implements Filter {
 >        {
 >            // 发送请求
 >            out.println("GET_USER_INFO 1001");
->        
+>      
 >            // 接收响应
 >            String response = in.readLine();
 >            System.out.println("服务器响应: " + response);
->        
+>      
 >        } catch (IOException e) {
 >            e.printStackTrace();
 >        }
