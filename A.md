@@ -332,6 +332,7 @@
 >   ```
 
 <hr>
+
 ### 3、javabean标签的使用
 
 - #### 标准JavaBean
@@ -405,10 +406,6 @@ public class User implements Serializable {
 </html>
 ```
 
-```
-
-
-
 - #### 作用域管理
 
 JavaBean可以在不同作用域中共享：
@@ -416,33 +413,32 @@ JavaBean可以在不同作用域中共享：
 | 作用域      | 描述                     | 访问方式                            |
 | :---------- | :----------------------- | :---------------------------------- |
 | page        | 当前页面有效（默认）     | pageContext.getAttribute()          |
-|请求| 同一次请求有效（含转发） | request.getAttribute()              |
+| 请求        | 同一次请求有效（含转发） | request.getAttribute()              |
 | session     | 同一用户会话有效         | request.getSession().getAttribute() |
 | application | 整个应用有效             | application.getAttribute()          |
 
 - #### 实际应用场景
 
 > ##### **用户登录信息存储**
-> 
+>
 > ```jsp
 > <jsp:useBean id="loginUser" class="com.model.User" scope="session"/>
 > <jsp:setProperty name="loginUser" property="*"/>
 > ```
-> 
+>
 > ##### **表单数据自动封装**
-> 
+>
 > ```jsp
 > <!-- 表单字段名与Bean属性名匹配 -->
 > <jsp:useBean id="formData" class="com.model.FormBean"/>
 > <jsp:setProperty name="formData" property="*"/>
 > ```
-> 
+>
 > ##### **配置信息共享**
-> 
+>
 > ```jsp
 > <jsp:useBean id="config" class="com.util.AppConfig" scope="application"/>
 > ```
-
 ### 4、jsp 获取客户端请求参数的内置对象
 
 - #### request 对象简介
@@ -454,83 +450,82 @@ JavaBean可以在不同作用域中共享：
 - #### 主要方法
 
 > ##### (1) 获取单个参数值
-> 
+>
 > ```jsp
 > String value = request.getParameter("参数名");
 > ```
-> 
+>
 > 示例：
-> 
+>
 > ```jsp
 > <%
->    String username = request.getParameter("username");
->    String password = request.getParameter("password");
+> String username = request.getParameter("username");
+> String password = request.getParameter("password");
 > %>
 > ```
-> 
+>
 > ##### (2) 获取多个同名参数值（如复选框）
-> 
+>
 > ```jsp
 > String[] values = request.getParameterValues("参数名");
 > ```
-> 
+>
 > 示例：
-> 
+>
 > ```jsp
 > <%
->    String[] hobbies = request.getParameterValues("hobby");
->    if(hobbies != null) {
->        for(String hobby : hobbies) {
->            out.print(hobby + "<br>");
->        }
->    }
+> String[] hobbies = request.getParameterValues("hobby");
+> if(hobbies != null) {
+>     for(String hobby : hobbies) {
+>         out.print(hobby + "<br>");
+>     }
+> }
 > %>
 > ```
-> 
+>
 > ##### (3) 获取所有参数名
-> 
+>
 > ```jsp
 > Enumeration<String> paramNames = request.getParameterNames();
 > ```
-> 
+>
 > 示例：
-> 
+>
 > ```jsp
 > <%
->    Enumeration<String> names = request.getParameterNames();
->    while(names.hasMoreElements()) {
->        String name = names.nextElement();
->        out.print(name + "=" + request.getParameter(name) + "<br>");
->    }
+> Enumeration<String> names = request.getParameterNames();
+> while(names.hasMoreElements()) {
+>     String name = names.nextElement();
+>     out.print(name + "=" + request.getParameter(name) + "<br>");
+> }
 > %>
 > ```
-> 
+>
 > ##### (4) 获取参数Map
-> 
+>
 > ```jsp
 > Map<String, String[]> paramMap = request.getParameterMap();
 > ```
-
 ### 5、jdbc里边用来执行简单不带参的SQL语句的接口
 
 - #### Statement(不带参数)
 
 > ##### Statement 接口特点
-> 
+>
 > - 用于执行**静态 SQL 语句**（不包含参数）
 > - 直接拼接 SQL 字符串，**有 SQL 注入风险**
 > - 适合执行 DDL 语句或简单的查询
-> 
+>
 > ##### 主要方法
-> 
+>
 > | 方法                                 | 描述                           |
-| :----------------------------------- | :----------------------------- |
-| `ResultSet executeQuery(String sql)` | 执行查询语句，返回结果集       |
-| `int executeUpdate(String sql)`      | 执行增删改语句，返回受影响行数 |
-| `boolean execute(String sql)`        | 执行任意SQL，返回是否有结果集  |
-> 
+> | :----------------------------------- | :----------------------------- |
+> | `ResultSet executeQuery(String sql)` | 执行查询语句，返回结果集       |
+> | `int executeUpdate(String sql)`      | 执行增删改语句，返回受影响行数 |
+> | `boolean execute(String sql)`        | 执行任意SQL，返回是否有结果集  |
+>
 > ##### 使用示例
-> 
+>
 > ```java
 > // 1. 创建Statement对象
 > Statement stmt = connection.createStatement();
@@ -549,25 +544,25 @@ JavaBean可以在不同作用域中共享：
 > rs.close();
 > stmt.close();
 > ```
-> 
+>
 > ##### 优缺点
-> 
+>
 > > ### 1. Statement 接口特点
-> > 
+> >
 > > - 用于执行**静态 SQL 语句**（不包含参数）
 > > - 直接拼接 SQL 字符串，**有 SQL 注入风险**
 > > - 适合执行 DDL 语句或简单的查询
-> > 
+> >
 > > ### 2. 主要方法
-> > 
+> >
 > > | 方法                                 | 描述                           |
-| :----------------------------------- | :----------------------------- |
-| `ResultSet executeQuery(String sql)` | 执行查询语句，返回结果集       |
-| `int executeUpdate(String sql)`      | 执行增删改语句，返回受影响行数 |
-| `boolean execute(String sql)`        | 执行任意SQL，返回是否有结果集  |
-> > 
+> > | :----------------------------------- | :----------------------------- |
+> > | `ResultSet executeQuery(String sql)` | 执行查询语句，返回结果集       |
+> > | `int executeUpdate(String sql)`      | 执行增删改语句，返回受影响行数 |
+> > | `boolean execute(String sql)`        | 执行任意SQL，返回是否有结果集  |
+> >
 > > ### 3. 使用示例
-> > 
+> >
 > > ```java
 > > // 1. 创建Statement对象
 > > Statement stmt = connection.createStatement();
@@ -586,40 +581,40 @@ JavaBean可以在不同作用域中共享：
 > > rs.close();
 > > stmt.close();
 > > ```
-> > 
+> >
 > > ### 4. 优缺点
-> > 
+> >
 > > **优点**：
-> > 
+> >
 > > - 使用简单
 > > - 适合执行一次性SQL
-> > 
+> >
 > > **缺点**：
-> > 
+> >
 > > - SQL注入风险高
 > > - 性能较低（每次执行都需编译）
 
 - #### 带参数（PreparedStatement）
 
 > ##### PreparedStatement 特点
-> 
+>
 > - 继承自 Statement 接口
 > - 使用**预编译**机制，**防止 SQL 注入**
 > - 支持参数化查询（使用 `?` 占位符）
 > - 性能更高（SQL预编译一次，多次执行）
-> 
+>
 > ##### 主要方法
-> 
+>
 > | 方法                                         | 描述                            |
-| :------------------------------------------- | :------------------------------ |
-| `void setXxx(int parameterIndex, Xxx value)` | 设置参数值（Xxx为各种数据类型） |
-| `ResultSet executeQuery()`                   | 执行查询（无需SQL参数）         |
-| `int executeUpdate()`                        | 执行更新（无需SQL参数）         |
-| `void addBatch()`                            | 添加到批处理                    |
-| `int[] executeBatch()`                       | 执行批处理                      |
-> 
+> | :------------------------------------------- | :------------------------------ |
+> | `void setXxx(int parameterIndex, Xxx value)` | 设置参数值（Xxx为各种数据类型） |
+> | `ResultSet executeQuery()`                   | 执行查询（无需SQL参数）         |
+> | `int executeUpdate()`                        | 执行更新（无需SQL参数）         |
+> | `void addBatch()`                            | 添加到批处理                    |
+> | `int[] executeBatch()`                       | 执行批处理                      |
+>
 > ##### 使用示例
-> 
+>
 > ```java
 > // 1. 创建PreparedStatement（带?占位符）
 > PreparedStatement pstmt = connection.prepareStatement(
@@ -646,30 +641,30 @@ JavaBean可以在不同作用域中共享：
 > rs.close();
 > pstmt.close();
 > ```
-> 
+>
 > ##### 参数类型设置方法
-> 
+>
 > | 方法                           | 对应SQL类型   |
-| :----------------------------- | :------------ |
-| `setString(int, String)`       | VARCHAR, CHAR |
-| `setInt(int, int)`             | INTEGER       |
-| `setDouble(int, double)`       | DOUBLE        |
-| `setDate(int, Date)`           | DATE          |
-| `setTimestamp(int, Timestamp)` | TIMESTAMP     |
-| `setBoolean(int, boolean)`     | BOOLEAN       |
-| `setNull(int, int)`            | 设置NULL      |
-> 
+> | :----------------------------- | :------------ |
+> | `setString(int, String)`       | VARCHAR, CHAR |
+> | `setInt(int, int)`             | INTEGER       |
+> | `setDouble(int, double)`       | DOUBLE        |
+> | `setDate(int, Date)`           | DATE          |
+> | `setTimestamp(int, Timestamp)` | TIMESTAMP     |
+> | `setBoolean(int, boolean)`     | BOOLEAN       |
+> | `setNull(int, int)`            | 设置NULL      |
+>
 > ##### 优缺点
-> 
+>
 > > ###### **优点**：
-> > 
+> >
 > > - 防止SQL注入
 > > - 性能更高
 > > - 代码可读性好
 > > - 支持批处理
-> > 
+> >
 > > ###### **缺点**：
-> > 
+> >
 > > - 编写稍复杂
 > > - 不适合动态表名/列名的情况
 
@@ -689,27 +684,27 @@ JavaBean可以在不同作用域中共享：
 - #### 初始化阶段 - init() 方法
 
 > ##### **执行时机**：
-> 
+>
 > - Servlet 容器（如 Tomcat）第一次加载 Servlet 时调用
 > - 只执行一次
-> 
+>
 > ##### **主要用途**：
-> 
+>
 > - 加载资源（数据库连接、配置文件等）
 > - 初始化参数
-> 
+>
 > ###### **示例**：
-> 
+>
 > ```java
 > public class MyServlet extends HttpServlet {
 >    private DatabaseConnection dbConnection;
->  
+> 
 >    @Override
 >    public void init() throws ServletException {
 >        // 初始化数据库连接
 >        dbConnection = new DatabaseConnection();
 >        dbConnection.connect();
->  
+> 
 >        // 获取初始化参数（web.xml中配置的）
 >        String config = getInitParameter("configFile");
 >        System.out.println("Servlet初始化完成，配置文件：" + config);
@@ -720,34 +715,34 @@ JavaBean可以在不同作用域中共享：
 - #### 处理请求阶段 - service() 方法
   
   > ##### **执行时机**：
-  > 
+  >
   > - 每次客户端请求时调用（执行多次）
   > - 根据请求类型调用 doGet() 或 doPost()
-  > 
+  >
   > ###### **主要用途**：
-  > 
+  >
   > - 处理客户端请求
   > - 生成响应
-  > 
+  >
   > ##### **示例**：
-  > 
+  >
   > ```java
   > public class MyServlet extends HttpServlet {
   >    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
   >            throws ServletException, IOException {
-  >  
+  > 
   >        response.setContentType("text/html");
   >        PrintWriter out = response.getWriter();
   >        out.println("<h1>处理GET请求</h1>");
-  >  
+  > 
   >        // 使用初始化阶段创建的数据库连接
   >        List<User> users = dbConnection.getUsers();
   >        // ...处理数据
   >    }
-  >  
+  > 
   >    protected void doPost(HttpServletRequest request, HttpServletResponse response) 
   >            throws ServletException, IOException {
-  >  
+  > 
   >        String username = request.getParameter("username");
   >        // 处理表单提交...
   >        response.sendRedirect("/success.jsp");
@@ -757,17 +752,17 @@ JavaBean可以在不同作用域中共享：
 - #### 销毁阶段 - destroy() 方法
   
   > ##### **执行时机**：
-  > 
+  >
   > - Servlet 容器关闭或 Servlet 被移除时调用
   > - 只执行一次
-  > 
+  >
   > ##### **主要用途**：
-  > 
+  >
   > - 释放资源（关闭数据库连接等）
   > - 保存状态信息
-  > 
+  >
   > ##### **示例**：
-  > 
+  >
   > ```java
   > public class MyServlet extends HttpServlet {
   >    @Override
@@ -777,7 +772,7 @@ JavaBean可以在不同作用域中共享：
   >            dbConnection.close();
   >            System.out.println("释放数据库连接");
   >        }
-  >  
+  > 
   >        // 保存日志信息等
   >        saveAccessLog();
   >    }
@@ -812,7 +807,6 @@ JavaBean可以在不同作用域中共享：
           System.out.println("Servlet销毁");
       }
   }
-```
 
 ### 7、作用域问题
 
