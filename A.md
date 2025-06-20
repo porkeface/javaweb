@@ -263,6 +263,7 @@
   >
 
 <hr>
+
 ### 2、tomcat的默认端口是什么
 
 > Tomcat服务器的默认端口是`8080`,这意味着
@@ -410,6 +411,7 @@ public class User implements Serializable {
 
 JavaBean可以在不同作用域中共享：
 
+
 | 作用域      | 描述                     | 访问方式                            |
 | :---------- | :----------------------- | :---------------------------------- |
 | page        | 当前页面有效（默认）     | pageContext.getAttribute()          |
@@ -439,6 +441,7 @@ JavaBean可以在不同作用域中共享：
 > ```jsp
 > <jsp:useBean id="config" class="com.util.AppConfig" scope="application"/>
 > ```
+
 ### 4、jsp 获取客户端请求参数的内置对象
 
 - #### request 对象简介
@@ -506,6 +509,7 @@ JavaBean可以在不同作用域中共享：
 > ```jsp
 > Map<String, String[]> paramMap = request.getParameterMap();
 > ```
+
 ### 5、jdbc里边用来执行简单不带参的SQL语句的接口
 
 - #### Statement(不带参数)
@@ -518,6 +522,7 @@ JavaBean可以在不同作用域中共享：
 >
 > ##### 主要方法
 >
+>
 > | 方法                                 | 描述                           |
 > | :----------------------------------- | :----------------------------- |
 > | `ResultSet executeQuery(String sql)` | 执行查询语句，返回结果集       |
@@ -529,17 +534,17 @@ JavaBean可以在不同作用域中共享：
 > ```java
 > // 1. 创建Statement对象
 > Statement stmt = connection.createStatement();
-> 
+>
 > // 2. 执行查询
 > ResultSet rs = stmt.executeQuery("SELECT * FROM products");
-> 
+>
 > // 3. 执行更新
 > int rows = stmt.executeUpdate(
 >    "UPDATE users SET status=1 WHERE id=1001");
-> 
+>
 > // 4. 执行DDL
 > stmt.execute("CREATE TABLE temp(id INT)");
-> 
+>
 > // 5. 关闭资源
 > rs.close();
 > stmt.close();
@@ -547,52 +552,54 @@ JavaBean可以在不同作用域中共享：
 >
 > ##### 优缺点
 >
-> > ### 1. Statement 接口特点
-> >
-> > - 用于执行**静态 SQL 语句**（不包含参数）
-> > - 直接拼接 SQL 字符串，**有 SQL 注入风险**
-> > - 适合执行 DDL 语句或简单的查询
-> >
-> > ### 2. 主要方法
-> >
-> > | 方法                                 | 描述                           |
-> > | :----------------------------------- | :----------------------------- |
-> > | `ResultSet executeQuery(String sql)` | 执行查询语句，返回结果集       |
-> > | `int executeUpdate(String sql)`      | 执行增删改语句，返回受影响行数 |
-> > | `boolean execute(String sql)`        | 执行任意SQL，返回是否有结果集  |
-> >
-> > ### 3. 使用示例
-> >
-> > ```java
-> > // 1. 创建Statement对象
-> > Statement stmt = connection.createStatement();
-> > 
-> > // 2. 执行查询
-> > ResultSet rs = stmt.executeQuery("SELECT * FROM products");
-> > 
-> > // 3. 执行更新
-> > int rows = stmt.executeUpdate(
-> >    "UPDATE users SET status=1 WHERE id=1001");
-> > 
-> > // 4. 执行DDL
-> > stmt.execute("CREATE TABLE temp(id INT)");
-> > 
-> > // 5. 关闭资源
-> > rs.close();
-> > stmt.close();
-> > ```
-> >
-> > ### 4. 优缺点
-> >
-> > **优点**：
-> >
-> > - 使用简单
-> > - 适合执行一次性SQL
-> >
-> > **缺点**：
-> >
-> > - SQL注入风险高
-> > - 性能较低（每次执行都需编译）
+>> ### 1. Statement 接口特点
+>>
+>> - 用于执行**静态 SQL 语句**（不包含参数）
+>> - 直接拼接 SQL 字符串，**有 SQL 注入风险**
+>> - 适合执行 DDL 语句或简单的查询
+>>
+>> ### 2. 主要方法
+>>
+>>
+>> | 方法                                 | 描述                           |
+>> | :----------------------------------- | :----------------------------- |
+>> | `ResultSet executeQuery(String sql)` | 执行查询语句，返回结果集       |
+>> | `int executeUpdate(String sql)`      | 执行增删改语句，返回受影响行数 |
+>> | `boolean execute(String sql)`        | 执行任意SQL，返回是否有结果集  |
+>>
+>> ### 3. 使用示例
+>>
+>> ```java
+>> // 1. 创建Statement对象
+>> Statement stmt = connection.createStatement();
+>>
+>> // 2. 执行查询
+>> ResultSet rs = stmt.executeQuery("SELECT * FROM products");
+>>
+>> // 3. 执行更新
+>> int rows = stmt.executeUpdate(
+>>    "UPDATE users SET status=1 WHERE id=1001");
+>>
+>> // 4. 执行DDL
+>> stmt.execute("CREATE TABLE temp(id INT)");
+>>
+>> // 5. 关闭资源
+>> rs.close();
+>> stmt.close();
+>> ```
+>>
+>> ### 4. 优缺点
+>>
+>> **优点**：
+>>
+>> - 使用简单
+>> - 适合执行一次性SQL
+>>
+>> **缺点**：
+>>
+>> - SQL注入风险高
+>> - 性能较低（每次执行都需编译）
+>>
 
 - #### 带参数（PreparedStatement）
 
@@ -604,6 +611,7 @@ JavaBean可以在不同作用域中共享：
 > - 性能更高（SQL预编译一次，多次执行）
 >
 > ##### 主要方法
+>
 >
 > | 方法                                         | 描述                            |
 > | :------------------------------------------- | :------------------------------ |
@@ -619,30 +627,31 @@ JavaBean可以在不同作用域中共享：
 > // 1. 创建PreparedStatement（带?占位符）
 > PreparedStatement pstmt = connection.prepareStatement(
 >    "SELECT * FROM users WHERE username=? AND password=?");
-> 
+>
 > // 2. 设置参数（索引从1开始）
 > pstmt.setString(1, "admin");
 > pstmt.setString(2, "123456");
-> 
+>
 > // 3. 执行查询
 > ResultSet rs = pstmt.executeQuery();
-> 
+>
 > // 4. 批处理示例
 > pstmt = connection.prepareStatement("INSERT INTO logs(message) VALUES(?)");
 > pstmt.setString(1, "Log entry 1");
 > pstmt.addBatch();
-> 
+>
 > pstmt.setString(1, "Log entry 2");
 > pstmt.addBatch();
-> 
+>
 > int[] counts = pstmt.executeBatch();
-> 
+>
 > // 5. 关闭资源
 > rs.close();
 > pstmt.close();
 > ```
 >
 > ##### 参数类型设置方法
+>
 >
 > | 方法                           | 对应SQL类型   |
 > | :----------------------------- | :------------ |
@@ -656,19 +665,21 @@ JavaBean可以在不同作用域中共享：
 >
 > ##### 优缺点
 >
-> > ###### **优点**：
-> >
-> > - 防止SQL注入
-> > - 性能更高
-> > - 代码可读性好
-> > - 支持批处理
-> >
-> > ###### **缺点**：
-> >
-> > - 编写稍复杂
-> > - 不适合动态表名/列名的情况
+>> ###### **优点**：
+>>
+>> - 防止SQL注入
+>> - 性能更高
+>> - 代码可读性好
+>> - 支持批处理
+>>
+>> ###### **缺点**：
+>>
+>> - 编写稍复杂
+>> - 不适合动态表名/列名的情况
+>>
 
 - #### **Statement vs PreparedStatement 对比**
+
 
 | 特性         | Statement                        | PreparedStatement                                |
 | :----------- | :------------------------------- | :----------------------------------------------- |
@@ -698,13 +709,13 @@ JavaBean可以在不同作用域中共享：
 > ```java
 > public class MyServlet extends HttpServlet {
 >    private DatabaseConnection dbConnection;
-> 
+>
 >    @Override
 >    public void init() throws ServletException {
 >        // 初始化数据库连接
 >        dbConnection = new DatabaseConnection();
 >        dbConnection.connect();
-> 
+>
 >        // 获取初始化参数（web.xml中配置的）
 >        String config = getInitParameter("configFile");
 >        System.out.println("Servlet初始化完成，配置文件：" + config);
@@ -713,7 +724,7 @@ JavaBean可以在不同作用域中共享：
 > ```
 
 - #### 处理请求阶段 - service() 方法
-  
+
   > ##### **执行时机**：
   >
   > - 每次客户端请求时调用（执行多次）
@@ -730,27 +741,28 @@ JavaBean可以在不同作用域中共享：
   > public class MyServlet extends HttpServlet {
   >    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
   >            throws ServletException, IOException {
-  > 
+  >
   >        response.setContentType("text/html");
   >        PrintWriter out = response.getWriter();
   >        out.println("<h1>处理GET请求</h1>");
-  > 
+  >
   >        // 使用初始化阶段创建的数据库连接
   >        List<User> users = dbConnection.getUsers();
   >        // ...处理数据
   >    }
-  > 
+  >
   >    protected void doPost(HttpServletRequest request, HttpServletResponse response) 
   >            throws ServletException, IOException {
-  > 
+  >
   >        String username = request.getParameter("username");
   >        // 处理表单提交...
   >        response.sendRedirect("/success.jsp");
   >    }
   > }
   > ```
+  >
 - #### 销毁阶段 - destroy() 方法
-  
+
   > ##### **执行时机**：
   >
   > - Servlet 容器关闭或 Servlet 被移除时调用
@@ -772,41 +784,44 @@ JavaBean可以在不同作用域中共享：
   >            dbConnection.close();
   >            System.out.println("释放数据库连接");
   >        }
-  > 
+  >
   >        // 保存日志信息等
   >        saveAccessLog();
   >    }
   > }
   > ```
+  >
 - #### 计数器 Servlet(完整例子)
-  
+
   ```java
   @WebServlet("/counter")
   public class CounterServlet extends HttpServlet {
       private int visitCount;
-  
+
       @Override
       public void init() {
           visitCount = 0;
           System.out.println("计数器Servlet初始化");
       }
-  
+
       @Override
       protected void doGet(HttpServletRequest request, HttpServletResponse response) 
               throws IOException {
-  
+
           visitCount++;
           response.setContentType("text/html");
           PrintWriter out = response.getWriter();
           out.println("<h2>访问次数: " + visitCount + "</h2>");
       }
-  
+
       @Override
       public void destroy() {
           System.out.println("最终访问次数: " + visitCount);
           System.out.println("Servlet销毁");
       }
   }
+
+  ```
 
 ### 7、作用域问题
 
@@ -1260,7 +1275,7 @@ JavaBean可以在不同作用域中共享：
   >                String name = rs.getString(2); // 通过列索引获取（从1开始）
   >                double salary = rs.getDouble("salary");
   >                Date hireDate = rs.getDate("hire_date");
-  >      
+  >    
   >                System.out.printf("%d\t%s\t%.2f\t%s%n", id, name, salary, hireDate);
   >            }
   >    
